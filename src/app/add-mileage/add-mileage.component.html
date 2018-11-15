@@ -19,7 +19,7 @@
         <input type="text" class="form-control" formControlName="note" #note />
       </div>
       <div class="form-group">
-        <button type="submit" 
+        <button (click)="addBusiness(mileage.value, speed.value, note.value)" 
         [disabled]="angForm.pristine || angForm.invalid" 
         class="btn btn-primary">Add Mileage</button>
       </div>

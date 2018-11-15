@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { MileageService } from "../mileage.service";
 
 @Component({
   selector: 'app-add-mileage',
@@ -9,7 +10,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class AddMileageComponent implements OnInit {
 
   angForm: FormGroup;
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private ms: MileageService) { 
     this.createForm();
   }
 
@@ -17,6 +18,10 @@ export class AddMileageComponent implements OnInit {
     this.angForm = this.fb.group({
       mileage: ['', Validators.required]
     });
+  }
+
+  addMileage(mileage, speed, note) {
+    this.ms.addMileage(mileage, speed, note);
   }
 
   ngOnInit() {
