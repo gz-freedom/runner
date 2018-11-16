@@ -16,7 +16,9 @@ export class AddMileageComponent implements OnInit {
 
   createForm() {
     this.angForm = this.fb.group({
-      mileage: ['', Validators.required]
+      mileage: ['', Validators.required],
+      speed: [],
+      note: []
     });
   }
 

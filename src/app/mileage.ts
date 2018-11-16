@@ -1,5 +1,5 @@
 export default class Mileage {
-    mileage: String;
+    mileage: Number;
     speed: Number;
     note: String;
 }
