@@ -40,7 +40,7 @@ mileageRoutes.route('/edit/:id').get(function (req, res) {
 
 //  Defined update route
 mileageRoutes.route('/update/:id').post(function (req, res) {
-    Mileage.findById(req.params.id, function(err, next, mileage) {
+    Mileage.findById(req.params.id, function(err, mileage) {
     if (!mileage)
       return next(new Error('Could not load Document'));
     else {
@@ -60,7 +60,7 @@ mileageRoutes.route('/update/:id').post(function (req, res) {
 
 // Defined delete | remove | destroy route
 mileageRoutes.route('/delete/:id').get(function (req, res) {
-    Mileage.findByIdAndRemove({_id: req.params.id}, function(err, mileage){
+    Mileage.findByIdAndDelete({_id: req.params.id}, function(err, mileage){
         if(err) res.json(err);
         else res.json('Successfully removed');
     });

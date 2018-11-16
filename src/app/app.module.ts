@@ -8,11 +8,15 @@ import { MileageService } from "./mileage.service";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddMileageComponent } from './add-mileage/add-mileage.component';
+import { HomeComponent } from './home/home.component';
+import { EditMileageComponent } from './edit-mileage/edit-mileage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddMileageComponent
+    AddMileageComponent,
+    HomeComponent,
+    EditMileageComponent
   ],
   imports: [
     BrowserModule,
