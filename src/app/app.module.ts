@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
 import { MileageService } from "./mileage.service";
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from "ng-pick-datetime";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,10 +22,13 @@ import { EditMileageComponent } from './edit-mileage/edit-mileage.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SlimLoadingBarModule
+    SlimLoadingBarModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   providers: [ MileageService ],
   bootstrap: [AppComponent]

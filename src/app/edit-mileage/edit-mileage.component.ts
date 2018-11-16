@@ -20,23 +20,25 @@ export class EditMileageComponent implements OnInit {
     this.angForm = this.fb.group({
       mileage: ['', Validators.required],
       speed: [],
-      note: []
+      note: [],
+      addedDate: [new Date()]
     });
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.ms.editMileage(params['id']).subscribe(res => {
-        console.log(res);
         this.editMileage = res;
       });
     });
   }
 
-  updateMileage(mileage, speed, note) {
+  updateMileage(mileage, speed, note, addedDate) {
     this.route.params.subscribe(params => {
-      this.ms.updateMileage(mileage, speed, note, params['id']);
-      this.router.navigate(['runner']);
+      this.ms.updateMileage(mileage, speed, note, addedDate, params['id'])
+          .subscribe(res => {
+            this.router.navigate(['runner']);
+          });
     });
   }
 

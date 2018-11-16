@@ -21,7 +21,8 @@ export class HomeComponent implements OnInit {
 
   deleteMileage(id) {
     this.ms.deleteMileage(id).subscribe(res => {
-      console.log('Deleted');
+      // get updated mileages list
+      this.ngOnInit();
     });
   }
 }

@@ -8,7 +8,6 @@ let Mileage = require('../models/Mileage');
 // Defined store route
 mileageRoutes.route('/add').post(function (req, res) {
   let mileage = new Mileage(req.body);
-  console.log(mileage);
   mileage.save()
     .then(mileage => {
       res.status(200).json({'mileage': 'mileage in added successfully'});
@@ -47,6 +46,7 @@ mileageRoutes.route('/update/:id').post(function (req, res) {
         mileage.mileage = req.body.mileage;
         mileage.speed = req.body.speed;
         mileage.note = req.body.note;
+        mileage.addedDate = req.body.addedDate;
 
         mileage.save().then(mileage => {
           res.json('Update complete');

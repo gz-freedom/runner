@@ -11,6 +11,9 @@ let Mileage = new Schema({
   },
   note: {
     type: String
+  },
+  addedDate: {
+    type: Date
   }
 },{
     collection: 'mileage'

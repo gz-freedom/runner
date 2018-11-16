@@ -19,7 +19,12 @@
         <input type="text" class="form-control" formControlName="note" #note />
       </div>
       <div class="form-group">
-        <button (click)="addMileage(mileage.value, speed.value, note.value)" 
+        <label class="col-md-4">Date</label>
+        <input class="form-control" formControlName="addedDate" #addedDate [owlDateTime]="dt" [owlDateTimeTrigger]="dt" placeholder="Please select date to add">
+        <owl-date-time [pickerType]="'calendar'" #dt></owl-date-time>
+      </div>
+      <div class="form-group">
+        <button (click)="addMileage(mileage.value, speed.value, note.value, addedDate.value)" 
         [disabled]="angForm.pristine || angForm.invalid" 
         class="btn btn-primary">Add Mileage</button>
       </div>
