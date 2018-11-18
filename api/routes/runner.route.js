@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
-const mileageRoutes = express.Router();
+const runnerRoutes = express.Router();
 
 // Require Mileage model in our routes module
 let Mileage = require('../models/Mileage');
+let PBLog = require('../models/PBLog');
 
 // Defined store route
-mileageRoutes.route('/add').post(function (req, res) {
+runnerRoutes.route('/add').post(function (req, res) {
   let mileage = new Mileage(req.body);
   mileage.save()
     .then(mileage => {
@@ -18,7 +19,7 @@ mileageRoutes.route('/add').post(function (req, res) {
 });
 
 // Defined get data(index or listing) route
-mileageRoutes.route('/').get(function (req, res) {
+runnerRoutes.route('/').get(function (req, res) {
     Mileage.find(function (err, mileages){
     if(err){
       console.log(err);
@@ -30,7 +31,7 @@ mileageRoutes.route('/').get(function (req, res) {
 });
 
 // Defined edit route
-mileageRoutes.route('/edit/:id').get(function (req, res) {
+runnerRoutes.route('/edit/:id').get(function (req, res) {
   let id = req.params.id;
   Mileage.findById(id, function (err, mileage){
       res.json(mileage);
@@ -38,7 +39,7 @@ mileageRoutes.route('/edit/:id').get(function (req, res) {
 });
 
 //  Defined update route
-mileageRoutes.route('/update/:id').post(function (req, res) {
+runnerRoutes.route('/update/:id').post(function (req, res) {
     Mileage.findById(req.params.id, function(err, mileage) {
     if (!mileage)
       return next(new Error('Could not load Document'));
@@ -59,11 +60,33 @@ mileageRoutes.route('/update/:id').post(function (req, res) {
 });
 
 // Defined delete | remove | destroy route
-mileageRoutes.route('/delete/:id').get(function (req, res) {
+runnerRoutes.route('/delete/:id').get(function (req, res) {
     Mileage.findByIdAndDelete({_id: req.params.id}, function(err, mileage){
         if(err) res.json(err);
         else res.json('Successfully removed');
     });
 });
 
-module.exports = mileageRoutes;
+runnerRoutes.route('/pb').post(function (req, res) {
+  let pbLog = new PBLog(req.body);
+  pbLog.save()
+    .then(log => {
+      res.status(200).json({'log': 'log in added successfully'});
+    })
+    .catch(err => {
+    res.status(400).send("unable to save to database");
+    });
+});
+
+runnerRoutes.route('/pb').get(function(req, res) {
+  PBLog.find(function(err, logs) {
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(logs);
+    }
+  });
+});
+
+module.exports = runnerRoutes;
