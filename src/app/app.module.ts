@@ -14,6 +14,7 @@ import { AddMileageComponent } from './add-mileage/add-mileage.component';
 import { HomeComponent } from './home/home.component';
 import { EditMileageComponent } from './edit-mileage/edit-mileage.component';
 import { PbComponent } from './pb/pb.component';
+import { TimePipe } from './time.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PbComponent } from './pb/pb.component';
     AddMileageComponent,
     HomeComponent,
     EditMileageComponent,
-    PbComponent
+    PbComponent,
+    TimePipe
   ],
   imports: [
     BrowserModule,

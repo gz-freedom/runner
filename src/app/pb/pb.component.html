@@ -1,47 +1,12 @@
 <div class="row">
-  <div class="col-sm">
+  <div class="col-sm" *ngFor="let best of bestList">
     <div class="card">
       <div class="card-header">
-        5公里最佳
-        <button (click)="open(addPb, 5)" class="btn btn-link btn-sm float-right">更新</button>
+        {{ best.title }}
+        <button (click)="open(addPb, best.type)" class="btn btn-link btn-sm float-right">更新</button>
       </div>
       <div class="card-body">
-        <h2 class="card-title">20分20秒</h2>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm">
-    <div class="card">
-      <div class="card-header">
-        10公里最佳
-        <button (click)="open(addPb, 10)" class="btn btn-link btn-sm float-right">更新</button>
-      </div>
-      <div class="card-body">
-        <h2 class="card-title">45分</h2>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm">
-    <div class="card">
-      <div class="card-header">
-        半马最佳
-        <button (click)="open(addPb, 21)" class="btn btn-link btn-sm float-right">更新</button>
-      </div>
-      <div class="card-body">
-        <h2 class="card-title">1小时30分</h2>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm">
-    <div class="card">
-      <div class="card-header">
-        全马最佳
-        <button (click)="open(addPb, 42)" class="btn btn-link btn-sm float-right">更新</button>
-      </div>
-      <div class="card-body">
-        <h2 class="card-title">3小时30分</h2>
+        <h2 class="card-title">{{ best.score }}</h2>
       </div>
     </div>
   </div>
@@ -54,14 +19,28 @@
   <div class="modal-body">
     <form [formGroup]="angForm" novalidate>
       <div class="form-group row">
-        <label for="bestScore" class="col-sm-3 col-form-label">最新纪录：</label>
+        <label class="col-sm-3 col-form-label">最新纪录：</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" formControlName="score" #score ngbAutofocus id="bestScore"/>
-          <div *ngIf="angForm.controls['score'].invalid && (angForm.controls['score'].dirty || angForm.controls['score'].touched)" class="alert alert-danger">
+          <div class="input-group">
+              <input type="text" class="form-control" formControlName="scoreHour" id="score-hour" #scoreHour>
+              <div class="input-group-append">
+                <span class="input-group-text">小时</span>
+              </div>
+              <input type="text" class="form-control" formControlName="scoreMinute" id="score-minute" #scoreMinute>
+              <div class="input-group-append">
+                <span class="input-group-text">分</span>
+              </div>
+              <input type="text" class="form-control" formControlName="scoreSecond" id="score-second" #scoreSecond>
+              <div class="input-group-append">
+                <span class="input-group-text">秒</span>
+              </div>
+          </div>
+          <!-- <input type="text" class="form-control" formControlName="score" #score ngbAutofocus id="bestScore"/> -->
+          <!-- <div *ngIf="angForm.controls['score'].invalid && (angForm.controls['score'].dirty || angForm.controls['score'].touched)" class="alert alert-danger">
             <div *ngIf="angForm.controls['score'].errors.required">
               最佳成绩是必填项
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="form-group row">
@@ -80,9 +59,9 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary" (click)="savePB(score.value, logDate.value, note.value)">更新</button>
+    <button class="btn btn-primary" (click)="savePB(scoreHour.value, scoreMinute.value, scoreSecond.value, logDate.value, note.value)">更新</button>
   </div>
 </ng-template>
 <ul class="list-group">
-  <li class="list-group-item">2018年12月12日，你创造了新的5公里记录，用时20分钟。</li>
+  <li class="list-group-item" *ngFor="let log of logs">{{ log.logDate | date: 'yyyy年MM月dd日' }}，你创造了新的{{ log.title }}，用时{{ log.score }}。</li>
 </ul>
