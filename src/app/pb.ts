@@ -1,5 +1,5 @@
 export default class PB {
-    score: String;
+    score: Number;
     logDate: Date;
     type: Number;
     note: String;

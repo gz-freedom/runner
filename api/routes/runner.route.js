@@ -7,7 +7,7 @@ let Mileage = require('../models/Mileage');
 let PBLog = require('../models/PBLog');
 
 // Defined store route
-runnerRoutes.route('/add').post(function (req, res) {
+runnerRoutes.route('/mileage').post(function (req, res) {
   let mileage = new Mileage(req.body);
   mileage.save()
     .then(mileage => {
@@ -31,7 +31,7 @@ runnerRoutes.route('/').get(function (req, res) {
 });
 
 // Defined edit route
-runnerRoutes.route('/edit/:id').get(function (req, res) {
+runnerRoutes.route('/mileage/edit/:id').get(function (req, res) {
   let id = req.params.id;
   Mileage.findById(id, function (err, mileage){
       res.json(mileage);
@@ -39,7 +39,7 @@ runnerRoutes.route('/edit/:id').get(function (req, res) {
 });
 
 //  Defined update route
-runnerRoutes.route('/update/:id').post(function (req, res) {
+runnerRoutes.route('/mileage/update/:id').post(function (req, res) {
     Mileage.findById(req.params.id, function(err, mileage) {
     if (!mileage)
       return next(new Error('Could not load Document'));
@@ -60,7 +60,7 @@ runnerRoutes.route('/update/:id').post(function (req, res) {
 });
 
 // Defined delete | remove | destroy route
-runnerRoutes.route('/delete/:id').get(function (req, res) {
+runnerRoutes.route('/mileage/delete/:id').get(function (req, res) {
     Mileage.findByIdAndDelete({_id: req.params.id}, function(err, mileage){
         if(err) res.json(err);
         else res.json('Successfully removed');

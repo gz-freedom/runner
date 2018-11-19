@@ -10,7 +10,7 @@ let PBLog = new Schema({
         type: Number
     },
     score: {
-        type: String
+        type: Number
     },
     note: {
         type: String

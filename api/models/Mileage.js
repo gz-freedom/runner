@@ -14,6 +14,9 @@ let Mileage = new Schema({
   },
   addedDate: {
     type: Date
+  },
+  score: {
+    type: Number
   }
 },{
     collection: 'mileage'

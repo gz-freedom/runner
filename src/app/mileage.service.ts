@@ -9,11 +9,12 @@ export class MileageService {
 
   constructor(private http: HttpClient) { }
 
-  addMileage(mileage, speed, note, addedDate) {
+  addMileage(mileage, speed, note, addedDate, score) {
     const obj = {
       mileage: mileage,
       speed: speed,
       note : note,
+      score: score,
       addedDate: addedDate
     };
 
