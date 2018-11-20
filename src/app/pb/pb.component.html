@@ -56,6 +56,7 @@
     <button class="btn btn-primary" (click)="savePB(scoreHour.value, scoreMinute.value, scoreSecond.value, logDate.value, note.value)">更新</button>
   </div>
 </ng-template>
+<h3 class="text-info">里程碑</h3>
 <ul class="list-group">
   <li class="list-group-item" *ngFor="let log of logs">{{ log.logDate | date: 'yyyy年MM月dd日' }}，你创造了新的{{ log.title }}，用时{{ log.score | time }}。</li>
 </ul>

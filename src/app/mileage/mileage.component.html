@@ -62,23 +62,27 @@
           </div>
         </form>
       </div>
-    </div>
-    <!-- run list -->
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let m of mileages">
-        <div class="row">
-          <div class="col-2">
-            {{ m.addedDate | date: "MM月dd日" }}
-          </div>
-          <div class="col-8">
-            <h2>{{ m.mileage }} KM</h2>
-            <p>{{ m.note }}</p>
-          </div>
-          <div class="col-2">
-            <button class="btn btn-link" (click)="editMileage()">编辑</button>
-            <button class="btn btn-link" (click)="deleteMileage(m._id)">删除</button>
-          </div>
+  </div>
+  <h3 class="text-info">跑步记录</h3>
+  <!-- run list -->
+  <ul class="list-group mileage-list">
+    <li class="list-group-item" *ngFor="let m of mileages">
+      <div class="row">
+        <div class="col-2">
+          {{ m.addedDate | date: "MM月dd日" }}
         </div>
-      </li>
-    </ul>
+        <div class="col-2">
+          <h2 class="text-warning">{{ m.mileage }} km</h2>
+        </div>
+        <div class="col-6">
+          <p class="text-info">用时：{{ m.score | time }}</p>
+          <p class="text-black-50">{{ m.note }}</p>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-link" (click)="editMileage()">编辑</button>
+          <button class="btn btn-link" (click)="deleteMileage(m._id)">删除</button>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
