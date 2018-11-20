@@ -20,7 +20,7 @@ export class MileageComponent implements OnInit {
   ngOnInit() {
     this.ms.getMileages()
         .subscribe((data: Mileage[]) => {
-          this.mileages = data;
+          this.mileages = data.reverse();
         });
   }
 
@@ -28,23 +28,23 @@ export class MileageComponent implements OnInit {
     this.angForm = this.fb.group({
       mileage: ['', Validators.required],
       note: [],
-      scoreHour: [0],
-      scoreMinute: [0],
-      scoreSecond: [0],
-      speedMinute: [0],
-      speedSecond: [0],
+      scoreHour: [],
+      scoreMinute: [],
+      scoreSecond: [],
       addedDate: [new Date()]
     });
   }
 
-  addMileage(mileage, sm, ss, note, addedDate, h, m, s) {
-    let score = h * 3600 + m * 60 + s;
-    let speed = sm * 60 + ss;
-    this.ms.addMileage(mileage, speed, note, addedDate, score)
+  addMileage(mileage, note, addedDate, h, m, s) {
+    let score = h * 3600 + m * 60 + parseInt(s);
+    this.ms.addMileage(mileage, note, addedDate, score)
         .subscribe(res => {
-          this.router.navigate(['runner']);
+          this.ngOnInit();
+          this.angForm.reset({ addedDate: new Date() });
         });
   }
+
+  editMileage() {}
 
   deleteMileage(id) {
     this.ms.deleteMileage(id).subscribe(res => {

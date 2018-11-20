@@ -1,6 +1,6 @@
-<div class="row">
-  <div class="col-sm" *ngFor="let best of bestList">
-    <div class="card">
+<div class="row row-best">
+  <div class="col-3" *ngFor="let best of bestList">
+    <div class="card bg-light">
       <div class="card-header">
         {{ best.title }}
         <button (click)="open(addPb, best.type)" class="btn btn-link btn-sm float-right">更新</button>
@@ -57,5 +57,5 @@
   </div>
 </ng-template>
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let log of logs">{{ log.logDate | date: 'yyyy年MM月dd日' }}，你创造了新的{{ log.title }}，用时{{ log.score }}。</li>
+  <li class="list-group-item" *ngFor="let log of logs">{{ log.logDate | date: 'yyyy年MM月dd日' }}，你创造了新的{{ log.title }}，用时{{ log.score | time }}。</li>
 </ul>

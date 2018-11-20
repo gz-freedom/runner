@@ -9,16 +9,15 @@ export class MileageService {
 
   constructor(private http: HttpClient) { }
 
-  addMileage(mileage, speed, note, addedDate, score) {
+  addMileage(mileage, note, addedDate, score) {
     const obj = {
       mileage: mileage,
-      speed: speed,
       note : note,
       score: score,
       addedDate: addedDate
     };
 
-    return this.http.post(`${this.uri}/add`, obj);
+    return this.http.post(`${this.uri}/mileage/add`, obj);
   }
 
   getMileages() {
@@ -26,7 +25,7 @@ export class MileageService {
   }
 
   editMileage(id) {
-    return this.http.get(`${this.uri}/edit/${id}`);
+    return this.http.get(`${this.uri}/mileage/edit/${id}`);
   }
 
   updateMileage(mileage, speed, note, addedDate, id) {
@@ -36,10 +35,10 @@ export class MileageService {
       note: note,
       addedDate: addedDate
     };
-    return this.http.post(`${this.uri}/update/${id}`, obj);
+    return this.http.post(`${this.uri}/mileage/update/${id}`, obj);
   }
 
   deleteMileage(id) {
-    return this.http.get(`${this.uri}/delete/${id}`);
+    return this.http.get(`${this.uri}/mileage/delete/${id}`);
   }
 }

@@ -24,7 +24,9 @@ export class PbComponent implements OnInit {
     // get all logs
     this.ps.getAllLogs()  
         .subscribe((data: PB[]) => {
-          this.logs = data.map(log => {
+          let dict = {}, logs = data.reverse();
+
+          this.logs = logs.map(log => {
             return {
               title: this.getFormattedTitle(log.type),
               type: log.type,
@@ -32,14 +34,22 @@ export class PbComponent implements OnInit {
               score: log.score
             };
           });
-          this.bestList = data.map(log => {
+
+          this.bestList = logs.filter(log => {
+            if(!dict["t" + log.type]) {
+              dict["t" + log.type] = true;
+              return true;
+            }
+            return false;
+          }).map(log => {
             return {
               title: this.getFormattedTitle(log.type),
               type: log.type,
               score: log.score
             };
+          }).sort((a:any, b:any) => {
+            return a.type - b.type;
           });
-          console.dir(data);
         });
   }
 
@@ -60,9 +70,10 @@ export class PbComponent implements OnInit {
   }
 
   savePB(h, m, s, logDate, note) {
-    let score = h * 3600 + m * 60 + s;
+    let score = h * 3600 + m * 60 + parseInt(s);
     this.ps.addPbLog(this.bestType, score, logDate, note).subscribe(res => {
       this.modalService.dismissAll();
+      this.ngOnInit();
     });
   }
 

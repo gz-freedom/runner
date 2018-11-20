@@ -10,7 +10,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddMileageComponent } from './add-mileage/add-mileage.component';
 import { HomeComponent } from './home/home.component';
 import { EditMileageComponent } from './edit-mileage/edit-mileage.component';
 import { PbComponent } from './pb/pb.component';
@@ -20,7 +19,6 @@ import { MileageComponent } from './mileage/mileage.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AddMileageComponent,
     HomeComponent,
     EditMileageComponent,
     PbComponent,

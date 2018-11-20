@@ -7,8 +7,9 @@ let Mileage = require('../models/Mileage');
 let PBLog = require('../models/PBLog');
 
 // Defined store route
-runnerRoutes.route('/mileage').post(function (req, res) {
+runnerRoutes.route('/mileage/add').post(function (req, res) {
   let mileage = new Mileage(req.body);
+  console.log(mileage);
   mileage.save()
     .then(mileage => {
       res.status(200).json({'mileage': 'mileage in added successfully'});
