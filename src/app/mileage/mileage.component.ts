@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import Mileage from "../mileage";
-import { Router } from "@angular/router";
 import { MileageService } from "../mileage.service";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-mileage',
@@ -12,15 +12,17 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class MileageComponent implements OnInit {
   mileages: Mileage[];
   angForm: FormGroup;
+  editForm: FormGroup;
+  editId: any;
 
-  constructor(private ms: MileageService, private fb: FormBuilder, private router: Router) {
+  constructor(private ms: MileageService, private fb: FormBuilder, private modalService: NgbModal) {
     this.createForm();
   }
 
   ngOnInit() {
     this.ms.getMileages()
         .subscribe((data: Mileage[]) => {
-          this.mileages = data.reverse();
+          this.mileages = data;
         });
   }
 
@@ -35,6 +37,16 @@ export class MileageComponent implements OnInit {
     });
   }
 
+  createEditForm(mileage, note, h, m,s) {
+    this.editForm = this.fb.group({
+      mileage: [mileage, Validators.required],
+      note: [note],
+      scoreHour: [h],
+      scoreMinute: [m],
+      scoreSecond: [s]
+    });
+  }
+
   addMileage(mileage, note, addedDate, h, m, s) {
     let score = h * 3600 + m * 60 + parseInt(s);
     this.ms.addMileage(mileage, note, addedDate, score)
@@ -44,7 +56,26 @@ export class MileageComponent implements OnInit {
         });
   }
 
-  editMileage() {}
+  open(editMileage, id) {
+    this.editId = id;
+    this.ms.editMileage(id).subscribe((data: Mileage) => {
+      let score = parseInt(data.score.toString());
+      let h = parseInt(score / 3600 + "");
+      score = score % 3600;
+      let m = parseInt(score / 60 + "");
+      let s = score % 60;
+      this.createEditForm(data.mileage, data.note, h, m, s);
+      this.modalService.open(editMileage);
+    });
+  }
+
+  updateMileage(mileage, h, m, s, note) {
+    let score = h * 3600 + m * 60 + parseInt(s);
+    this.ms.updateMileage(mileage, score, note, this.editId).subscribe(res => {
+      this.modalService.dismissAll();
+      this.ngOnInit();
+    });
+  }
 
   deleteMileage(id) {
     this.ms.deleteMileage(id).subscribe(res => {

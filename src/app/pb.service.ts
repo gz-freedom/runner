@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
   providedIn: 'root'
 })
 export class PbService {
-  uri = 'http://localhost:4000/runner';
+  uri = 'http://localhost:4000/runner/pb';
 
   constructor(private http: HttpClient) { }
 
@@ -16,10 +16,10 @@ export class PbService {
       logDate: logDate,
       note: note
     };
-    return this.http.post(`${this.uri}/pb`, obj);
+    return this.http.post(`${this.uri}/add`, obj);
   }
 
   getAllLogs() {
-    return this.http.get(`${this.uri}/pb`);
+    return this.http.get(`${this.uri}`);
   }
 }

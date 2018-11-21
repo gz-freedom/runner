@@ -1,15 +1,13 @@
 const express = require('express');
-const app = express();
 const runnerRoutes = express.Router();
 
-// Require Mileage model in our routes module
+// Require models in our routes module
 let Mileage = require('../models/Mileage');
 let PBLog = require('../models/PBLog');
 
-// Defined store route
+// add mileage
 runnerRoutes.route('/mileage/add').post(function (req, res) {
   let mileage = new Mileage(req.body);
-  console.log(mileage);
   mileage.save()
     .then(mileage => {
       res.status(200).json({'mileage': 'mileage in added successfully'});
@@ -19,19 +17,19 @@ runnerRoutes.route('/mileage/add').post(function (req, res) {
     });
 });
 
-// Defined get data(index or listing) route
-runnerRoutes.route('/').get(function (req, res) {
-    Mileage.find(function (err, mileages){
+// get mileage records
+runnerRoutes.route('/mileage').get(function (req, res) {
+  Mileage.find(function (err, mileages){
     if(err){
       console.log(err);
     }
     else {
       res.json(mileages);
     }
-  });
+  }).sort({ 'addedDate': -1 });
 });
 
-// Defined edit route
+// edit mileage
 runnerRoutes.route('/mileage/edit/:id').get(function (req, res) {
   let id = req.params.id;
   Mileage.findById(id, function (err, mileage){
@@ -39,16 +37,15 @@ runnerRoutes.route('/mileage/edit/:id').get(function (req, res) {
   });
 });
 
-//  Defined update route
+// update mileage
 runnerRoutes.route('/mileage/update/:id').post(function (req, res) {
     Mileage.findById(req.params.id, function(err, mileage) {
     if (!mileage)
       return next(new Error('Could not load Document'));
     else {
         mileage.mileage = req.body.mileage;
-        mileage.speed = req.body.speed;
+        mileage.score = req.body.score;
         mileage.note = req.body.note;
-        mileage.addedDate = req.body.addedDate;
 
         mileage.save().then(mileage => {
           res.json('Update complete');
@@ -60,7 +57,7 @@ runnerRoutes.route('/mileage/update/:id').post(function (req, res) {
   });
 });
 
-// Defined delete | remove | destroy route
+// delete mileage
 runnerRoutes.route('/mileage/delete/:id').get(function (req, res) {
     Mileage.findByIdAndDelete({_id: req.params.id}, function(err, mileage){
         if(err) res.json(err);
@@ -68,17 +65,19 @@ runnerRoutes.route('/mileage/delete/:id').get(function (req, res) {
     });
 });
 
-runnerRoutes.route('/pb').post(function (req, res) {
+// add personal best
+runnerRoutes.route('/pb/add').post(function (req, res) {
   let pbLog = new PBLog(req.body);
   pbLog.save()
     .then(log => {
       res.status(200).json({'log': 'log in added successfully'});
     })
     .catch(err => {
-    res.status(400).send("unable to save to database");
+      res.status(400).send("unable to save to database");
     });
 });
 
+// get logs of PB
 runnerRoutes.route('/pb').get(function(req, res) {
   PBLog.find(function(err, logs) {
     if(err){
@@ -87,7 +86,7 @@ runnerRoutes.route('/pb').get(function(req, res) {
     else {
       res.json(logs);
     }
-  });
+  }).sort({ 'logDate': -1 });
 });
 
 module.exports = runnerRoutes;

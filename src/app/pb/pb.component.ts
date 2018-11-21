@@ -23,8 +23,8 @@ export class PbComponent implements OnInit {
   ngOnInit() {
     // get all logs
     this.ps.getAllLogs()  
-        .subscribe((data: PB[]) => {
-          let dict = {}, logs = data.reverse();
+        .subscribe((logs: PB[]) => {
+          let dict = {};
 
           this.logs = logs.map(log => {
             return {

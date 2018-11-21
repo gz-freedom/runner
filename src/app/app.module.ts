@@ -11,7 +11,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { EditMileageComponent } from './edit-mileage/edit-mileage.component';
 import { PbComponent } from './pb/pb.component';
 import { TimePipe } from './time.pipe';
 import { MileageComponent } from './mileage/mileage.component';
@@ -20,7 +19,6 @@ import { MileageComponent } from './mileage/mileage.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    EditMileageComponent,
     PbComponent,
     TimePipe,
     MileageComponent

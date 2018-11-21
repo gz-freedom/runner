@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class MileageService {
-  uri = 'http://localhost:4000/runner';
+  uri = 'http://localhost:4000/runner/mileage';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class MileageService {
       addedDate: addedDate
     };
 
-    return this.http.post(`${this.uri}/mileage/add`, obj);
+    return this.http.post(`${this.uri}/add`, obj);
   }
 
   getMileages() {
@@ -25,20 +25,19 @@ export class MileageService {
   }
 
   editMileage(id) {
-    return this.http.get(`${this.uri}/mileage/edit/${id}`);
+    return this.http.get(`${this.uri}/edit/${id}`);
   }
 
-  updateMileage(mileage, speed, note, addedDate, id) {
+  updateMileage(mileage, score, note, id) {
     const obj = {
       mileage: mileage,
-      speed: speed,
-      note: note,
-      addedDate: addedDate
+      score: score,
+      note: note
     };
-    return this.http.post(`${this.uri}/mileage/update/${id}`, obj);
+    return this.http.post(`${this.uri}/update/${id}`, obj);
   }
 
   deleteMileage(id) {
-    return this.http.get(`${this.uri}/mileage/delete/${id}`);
+    return this.http.get(`${this.uri}/delete/${id}`);
   }
 }
