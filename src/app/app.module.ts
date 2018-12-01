@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { PbComponent } from './pb/pb.component';
 import { TimePipe } from './time.pipe';
 import { MileageComponent } from './mileage/mileage.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MileageComponent } from './mileage/mileage.component';
     HomeComponent,
     PbComponent,
     TimePipe,
-    MileageComponent
+    MileageComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

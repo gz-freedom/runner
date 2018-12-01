@@ -63,13 +63,16 @@
         </form>
       </div>
   </div>
-  <h3 class="text-info">跑步记录</h3>
+  <div>
+    <a class="float-right mt-2" routerLink="/runner/history">历史记录</a>
+    <h3 class="text-info">当月跑步记录</h3>
+  </div>
   <!-- run list -->
   <ul class="list-group mileage-list">
     <li class="list-group-item" *ngFor="let m of mileages">
       <div class="row">
         <div class="col-2">
-          {{ m.addedDate | date: "MM月dd日" }}
+          {{ m.addedDate | date: "dd" }}
         </div>
         <div class="col-2">
           <h2 class="text-warning">{{ m.mileage }} km</h2>

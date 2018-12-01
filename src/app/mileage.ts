@@ -4,4 +4,6 @@ export default class Mileage {
     score: Number;
     note: String;
     addedDate: Date;
+    year: Number;
+    month: Number;
 }

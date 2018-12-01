@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private ms: MileageService) { }
 
   ngOnInit() {
-    this.ms.getMileages()
+    this.ms.getAllMileages()
         .subscribe((data: Mileage[]) => {
           this.mileages = data;
         });

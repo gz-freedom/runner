@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MileageComponent } from "./mileage/mileage.component";
 import { HomeComponent } from './home/home.component';
 import { PbComponent } from "./pb/pb.component";
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'runner/pb',
     component: PbComponent
+  },
+  {
+    path: 'runner/history',
+    component: HistoryComponent
   }
 ];
 

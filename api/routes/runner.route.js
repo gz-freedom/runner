@@ -29,6 +29,20 @@ runnerRoutes.route('/mileage').get(function (req, res) {
   }).sort({ 'addedDate': -1 });
 });
 
+// get mileage by month
+runnerRoutes.route('/mileage/:yearmonth').get((req, res) => {
+  let year = req.params.yearmonth.split(",")[0];
+  let month = req.params.yearmonth.split(",")[1];
+  Mileage.find((err, mileages) => {
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(mileages);
+    }
+  }).where({ "year": year, "month": month }).sort({ 'addedDate': -1 });
+});
+
 // edit mileage
 runnerRoutes.route('/mileage/edit/:id').get(function (req, res) {
   let id = req.params.id;

@@ -20,10 +20,12 @@ export class MileageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.ms.getMileages()
-        .subscribe((data: Mileage[]) => {
-          this.mileages = data;
-        });
+    let todayDate = new Date();
+    let year = todayDate.getFullYear();
+    let month = todayDate.getMonth() + 1;
+    this.ms.getMileagesByMonth(year, month).subscribe((data: Mileage[]) => {
+      this.mileages = data;
+    });
   }
 
   createForm() {
@@ -49,7 +51,9 @@ export class MileageComponent implements OnInit {
 
   addMileage(mileage, note, addedDate, h, m, s) {
     let score = h * 3600 + m * 60 + parseInt(s);
-    this.ms.addMileage(mileage, note, addedDate, score)
+    let year = new Date(addedDate).getFullYear();
+    let month = new Date(addedDate).getMonth() + 1;
+    this.ms.addMileage(mileage, note, addedDate, score, year, month)
         .subscribe(res => {
           this.ngOnInit();
           this.angForm.reset({ addedDate: new Date() });
