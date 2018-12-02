@@ -71,23 +71,25 @@
   <ul class="list-group mileage-list">
     <li class="list-group-item" *ngFor="let m of mileages">
       <div class="row">
-        <div class="col-2">
-          {{ m.addedDate | date: "dd" }}
+        <div class="col-2 border-right">
+          <h1 class="text-center mt-2">{{ m.addedDate | date: "dd" }}</h1>
         </div>
-        <div class="col-2">
-          <h2 class="text-warning">{{ m.mileage }} km</h2>
+        <div class="col-2 border-right">
+          <h2 class="text-warning mt-2">{{ m.mileage }} km</h2>
         </div>
-        <div class="col-6">
-          <p class="text-info">用时：{{ m.score | time }}</p>
-          <p class="text-black-50">{{ m.note }}</p>
+        <div class="col-6 border-right">
+          <p class="text-info mt-2 mb-2">用时：{{ m.score | time }}</p>
+          <p class="text-black-50 mb-3">{{ m.note }}</p>
         </div>
         <div class="col-2">
           <button class="btn btn-link" (click)="open(editMileage, m._id)">编辑</button>
-          <button class="btn btn-link" (click)="deleteMileage(m._id)">删除</button>
+          <button class="btn btn-link" (click)="openConfirm(deleteMileage, m._id)">删除</button>
         </div>
       </div>
     </li>
   </ul>
+
+  <!-- template for updating mileage record -->
   <ng-template #editMileage let-modal>
     <div class="modal-header">
       <h5 class="modal-title">更新跑步记录</h5>
@@ -130,6 +132,23 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-primary" (click)="updateMileage(mileage.value, scoreHour.value, scoreMinute.value, scoreSecond.value, note.value)">更新</button>
+    </div>
+  </ng-template>
+  <!-- delete confirm template -->
+  <ng-template #deleteMileage let-modal>
+    <div class="modal-header">
+      <p class="modal-title" id="modal-title">删除确认</p>
+      <button type="button" class="close" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h4 class="text-danger">你确定要删除这条记录吗？</h4>
+      <p>删除后将无法复原。</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">取消</button>
+      <button type="button" class="btn btn-danger" (click)="confirmDeleteMileage()">确定</button>
     </div>
   </ng-template>
 </div>

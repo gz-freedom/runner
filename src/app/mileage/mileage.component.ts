@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Mileage from "../mileage";
 import { MileageService } from "../mileage.service";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-mileage',
@@ -14,6 +14,7 @@ export class MileageComponent implements OnInit {
   angForm: FormGroup;
   editForm: FormGroup;
   editId: any;
+  deleteId: any;
 
   constructor(private ms: MileageService, private fb: FormBuilder, private modalService: NgbModal) {
     this.createForm();
@@ -73,6 +74,11 @@ export class MileageComponent implements OnInit {
     });
   }
 
+  openConfirm(deleteMileage, id) {
+    this.deleteId = id;
+    this.modalService.open(deleteMileage);
+  }
+
   updateMileage(mileage, h, m, s, note) {
     let score = h * 3600 + m * 60 + parseInt(s);
     this.ms.updateMileage(mileage, score, note, this.editId).subscribe(res => {
@@ -81,8 +87,8 @@ export class MileageComponent implements OnInit {
     });
   }
 
-  deleteMileage(id) {
-    this.ms.deleteMileage(id).subscribe(res => {
+  confirmDeleteMileage() {
+    this.ms.deleteMileage(this.deleteId).subscribe(res => {
       // get updated mileages list
       this.ngOnInit();
     });

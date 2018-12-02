@@ -1,0 +1,22 @@
+.year-list-history {
+    border: #ddd solid 1px;
+}
+.year-list-history .year-title {
+    padding: 0.2em .5em;
+    margin-bottom: 0;
+}
+.month-list-history {
+    margin-bottom: 0;
+}
+.month-list-history dt {
+    border-top: #ddd solid 1px;
+    border-bottom: #ddd solid 1px;
+}
+.month-list-history .month-title {
+    padding: 0.2em .5em;
+    margin-bottom: 0;
+}
+
+.day-list-history {
+    border-bottom: #ddd solid 1px;
+}
