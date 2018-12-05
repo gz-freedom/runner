@@ -15,6 +15,8 @@ export class MileageComponent implements OnInit {
   editForm: FormGroup;
   editId: any;
   deleteId: any;
+  currentMonth:number = 0;
+  monthTotal:number = 0;
 
   constructor(private ms: MileageService, private fb: FormBuilder, private modalService: NgbModal) {
     this.createForm();
@@ -24,8 +26,12 @@ export class MileageComponent implements OnInit {
     let todayDate = new Date();
     let year = todayDate.getFullYear();
     let month = todayDate.getMonth() + 1;
+    this.currentMonth = month;
     this.ms.getMileagesByMonth(year, month).subscribe((data: Mileage[]) => {
       this.mileages = data;
+      data.forEach(d => {
+        this.monthTotal += d.mileage;
+      });
     });
   }
 

@@ -3,10 +3,10 @@
       <div class="card-body">
         <form [formGroup]="angForm" novalidate>
           <div class="row">
-            <div class="col-6">
+            <div class="col-3">
               <div class="form-group row">
-                <label class="col-2 col-form-label">公里</label>
-                <div class="col-10">
+                <label class="col-3 col-form-label">公里</label>
+                <div class="col-9">
                   <input type="number" class="form-control" formControlName="mileage" #mileage />
                   <!-- <div *ngIf="angForm.controls['mileage'].invalid && (angForm.controls['mileage'].dirty || angForm.controls['mileage'].touched)" class="alert alert-danger">
                     <div *ngIf="angForm.controls['mileage'].errors.required">这是必填项</div>
@@ -35,21 +35,19 @@
                 </div>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-3">
                 <div class="form-group row">
-                  <label class="col-2 col-form-label">日期</label>
-                  <div class="col-10">
+                  <label class="col-3 col-form-label">日期</label>
+                  <div class="col-9">
                     <input class="form-control" formControlName="addedDate" #addedDate [owlDateTime]="dt" [owlDateTimeTrigger]="dt" placeholder="Please select date to add">
                     <owl-date-time [pickerType]="'calendar'" #dt></owl-date-time>
                   </div>
                 </div>
               </div>
-            <div class="col-6">
-              <div class="form-group row">
-                <label class="col-2 col-form-label">备注</label>
-                <div class="col-10">
-                  <input type="text" class="form-control" formControlName="note" #note />
-                </div>
+            <div class="col-12">
+              <div class="form-group">
+                <label class="col-form-label">备注</label>
+                <textarea class="form-control" formControlName="note" #note></textarea>
               </div>
             </div>
             <div class="col-12">
@@ -65,7 +63,8 @@
   </div>
   <div>
     <a class="float-right mt-2" routerLink="/runner/history">历史记录</a>
-    <h3 class="text-info">当月跑步记录</h3>
+    <h3 class="text-info">{{ currentMonth }}月跑步记录</h3>
+    <p>这个月已经跑了{{ monthTotal }}公里</p>
   </div>
   <!-- run list -->
   <ul class="list-group mileage-list">
@@ -125,7 +124,7 @@
         <div class="form-group row">
           <label for="bestNote" class="col-sm-3 col-form-label">备注：</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" formControlName="note" #note id="bestNote"/>
+            <textarea class="form-control" formControlName="note" #note id="bestNote"></textarea>
           </div>
         </div>
       </form>

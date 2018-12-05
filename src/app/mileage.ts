@@ -1,9 +1,9 @@
 export default class Mileage {
-    mileage: Number;
-    speed: Number;
-    score: Number;
-    note: String;
+    mileage: number;
+    speed: number;
+    score: number;
+    note: string;
     addedDate: Date;
-    year: Number;
-    month: Number;
+    year: number;
+    month: number;
 }
